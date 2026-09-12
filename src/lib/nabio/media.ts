@@ -116,8 +116,10 @@ export async function deleteMedia(ref?: string | null) {
 export function resolveMediaUrl(ref?: string | null): string | null {
   if (!ref) return null;
   if (!isMediaRef(ref)) return ref;
-  const { data } = supabase.storage.from(BUCKET).getPublicUrl(refToPath(ref));
-  return data.publicUrl || null;
+  return `/api/public/media/${refToPath(ref)
+    .split("/")
+    .map((part) => encodeURIComponent(part))
+    .join("/")}`;
 }
 
 /** Duração de um vídeo local, em segundos. */
