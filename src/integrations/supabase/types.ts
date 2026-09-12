@@ -35,6 +35,140 @@ export type Database = {
         }
         Relationships: []
       }
+      landing_preview: {
+        Row: {
+          accent_color: string
+          avatar_url: string | null
+          background_color: string
+          background_fit: string
+          background_position: string
+          background_url: string | null
+          bio: string
+          button_border_color: string
+          button_border_width: number
+          button_color: string
+          button_icon_color: string
+          button_opacity: number
+          button_radius: number
+          button_shadow: string
+          button_text_color: string
+          created_at: string
+          display_name: string
+          followers_text: string
+          footer_text: string
+          id: string
+          location: string
+          muted_color: string
+          overlay: string
+          text_color: string
+          updated_at: string
+          username: string
+        }
+        Insert: {
+          accent_color?: string
+          avatar_url?: string | null
+          background_color?: string
+          background_fit?: string
+          background_position?: string
+          background_url?: string | null
+          bio?: string
+          button_border_color?: string
+          button_border_width?: number
+          button_color?: string
+          button_icon_color?: string
+          button_opacity?: number
+          button_radius?: number
+          button_shadow?: string
+          button_text_color?: string
+          created_at?: string
+          display_name?: string
+          followers_text?: string
+          footer_text?: string
+          id?: string
+          location?: string
+          muted_color?: string
+          overlay?: string
+          text_color?: string
+          updated_at?: string
+          username?: string
+        }
+        Update: {
+          accent_color?: string
+          avatar_url?: string | null
+          background_color?: string
+          background_fit?: string
+          background_position?: string
+          background_url?: string | null
+          bio?: string
+          button_border_color?: string
+          button_border_width?: number
+          button_color?: string
+          button_icon_color?: string
+          button_opacity?: number
+          button_radius?: number
+          button_shadow?: string
+          button_text_color?: string
+          created_at?: string
+          display_name?: string
+          followers_text?: string
+          footer_text?: string
+          id?: string
+          location?: string
+          muted_color?: string
+          overlay?: string
+          text_color?: string
+          updated_at?: string
+          username?: string
+        }
+        Relationships: []
+      }
+      landing_preview_links: {
+        Row: {
+          created_at: string
+          icon: string
+          id: string
+          is_active: boolean
+          preview_id: string
+          sort_order: number
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          icon?: string
+          id?: string
+          is_active?: boolean
+          preview_id: string
+          sort_order?: number
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+          url?: string
+        }
+        Update: {
+          created_at?: string
+          icon?: string
+          id?: string
+          is_active?: boolean
+          preview_id?: string
+          sort_order?: number
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "landing_preview_links_preview_id_fkey"
+            columns: ["preview_id"]
+            isOneToOne: false
+            referencedRelation: "landing_preview"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       links: {
         Row: {
           active: boolean
