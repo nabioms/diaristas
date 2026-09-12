@@ -42,7 +42,9 @@ export type Database = {
           background_color: string
           background_fit: string
           background_position: string
+          background_type: string
           background_url: string | null
+          background_video_url: string | null
           bio: string
           button_border_color: string
           button_border_width: number
@@ -70,7 +72,9 @@ export type Database = {
           background_color?: string
           background_fit?: string
           background_position?: string
+          background_type?: string
           background_url?: string | null
+          background_video_url?: string | null
           bio?: string
           button_border_color?: string
           button_border_width?: number
@@ -98,7 +102,9 @@ export type Database = {
           background_color?: string
           background_fit?: string
           background_position?: string
+          background_type?: string
           background_url?: string | null
+          background_video_url?: string | null
           bio?: string
           button_border_color?: string
           button_border_width?: number
@@ -226,6 +232,9 @@ export type Database = {
           counter_value: string | null
           created_at: string
           display_name: string
+          featured_link_id: string | null
+          featured_on_home: boolean
+          featured_order: number
           id: string
           page_views: number
           plan: string
@@ -242,6 +251,9 @@ export type Database = {
           counter_value?: string | null
           created_at?: string
           display_name?: string
+          featured_link_id?: string | null
+          featured_on_home?: boolean
+          featured_order?: number
           id: string
           page_views?: number
           plan?: string
@@ -258,6 +270,9 @@ export type Database = {
           counter_value?: string | null
           created_at?: string
           display_name?: string
+          featured_link_id?: string | null
+          featured_on_home?: boolean
+          featured_order?: number
           id?: string
           page_views?: number
           plan?: string
@@ -265,7 +280,15 @@ export type Database = {
           theme_id?: string
           username?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "profiles_featured_link_id_fkey"
+            columns: ["featured_link_id"]
+            isOneToOne: false
+            referencedRelation: "links"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       reports: {
         Row: {
