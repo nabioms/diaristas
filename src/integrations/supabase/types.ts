@@ -14,16 +14,198 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      activity_logs: {
+        Row: {
+          created_at: string
+          id: string
+          message: string
+          type: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message?: string
+          type?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message?: string
+          type?: string
+        }
+        Relationships: []
+      }
+      links: {
+        Row: {
+          active: boolean
+          clicks: number
+          created_at: string
+          id: string
+          position: number
+          thumbnail: string | null
+          title: string
+          type: string
+          user_id: string
+          value: string
+        }
+        Insert: {
+          active?: boolean
+          clicks?: number
+          created_at?: string
+          id?: string
+          position?: number
+          thumbnail?: string | null
+          title?: string
+          type?: string
+          user_id: string
+          value?: string
+        }
+        Update: {
+          active?: boolean
+          clicks?: number
+          created_at?: string
+          id?: string
+          position?: number
+          thumbnail?: string | null
+          title?: string
+          type?: string
+          user_id?: string
+          value?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "links_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          background_url: string | null
+          background_video_url: string | null
+          bio: string | null
+          counter_label: string | null
+          counter_value: string | null
+          created_at: string
+          display_name: string
+          id: string
+          page_views: number
+          plan: string
+          status: string
+          theme_id: string
+          username: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          background_url?: string | null
+          background_video_url?: string | null
+          bio?: string | null
+          counter_label?: string | null
+          counter_value?: string | null
+          created_at?: string
+          display_name?: string
+          id: string
+          page_views?: number
+          plan?: string
+          status?: string
+          theme_id?: string
+          username: string
+        }
+        Update: {
+          avatar_url?: string | null
+          background_url?: string | null
+          background_video_url?: string | null
+          bio?: string | null
+          counter_label?: string | null
+          counter_value?: string | null
+          created_at?: string
+          display_name?: string
+          id?: string
+          page_views?: number
+          plan?: string
+          status?: string
+          theme_id?: string
+          username?: string
+        }
+        Relationships: []
+      }
+      reports: {
+        Row: {
+          created_at: string
+          id: string
+          reason: string
+          reported_user_id: string
+          reporter: string
+          resolved: boolean
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          reason?: string
+          reported_user_id: string
+          reporter?: string
+          resolved?: boolean
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          reason?: string
+          reported_user_id?: string
+          reporter?: string
+          resolved?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reports_reported_user_id_fkey"
+            columns: ["reported_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      increment_link_clicks: { Args: { _link_id: string }; Returns: undefined }
+      increment_page_views: {
+        Args: { _profile_id: string }
+        Returns: undefined
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +332,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
